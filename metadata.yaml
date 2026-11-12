@@ -1,0 +1,8 @@
+name: astrbot_plugin_volc_asr
+display_name: D96的火山引擎多语种语音识别
+desc: 基于火山引擎（豆包）大模型语音识别的插件，收到语音自动转写为文本交给后续流程，支持录音文件极速版与流式两种模式。
+short_desc: 语音消息自动转写为文本，支持火山引擎 flash / stream 两种识别模式。
+version: v1.0.4
+author: Splinchi
+repo: "https://github.com/splinchi-d96/astrbot_plugin_volc_asr"
+astrbot_version: ">=4.0.0"

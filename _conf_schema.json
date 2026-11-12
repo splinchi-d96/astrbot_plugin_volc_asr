@@ -1,0 +1,156 @@
+{
+  "api_key": {
+    "description": "火山引擎 API Key",
+    "type": "string",
+    "hint": "豆包语音控制台 > API Key 管理 中创建，v3 极速识别接口必填",
+    "default": ""
+  },
+  "api_mode": {
+    "description": "接口模式",
+    "type": "string",
+    "options": ["flash", "stream"],
+    "hint": "flash=录音文件极速版（需 auc_turbo 授权）；stream=流式识别（需已开通流式语音识别）",
+    "default": "stream"
+  },
+  "resource_id": {
+    "description": "资源 ID",
+    "type": "string",
+    "hint": "必须与控制台已授权的资源一致。极速版为 volc.bigasr.auc_turbo；若报 45000030 requested resource not granted，说明该 Key 未开通此资源",
+    "default": "volc.bigasr.auc_turbo"
+  },
+  "language": {
+    "description": "识别语种",
+    "type": "string",
+    "hint": "留空自动检测；中文 zh-CN、英语 en-US、日语 ja-JP、粤语 yue-CN",
+    "default": ""
+  },
+  "format": {
+    "description": "音频格式",
+    "type": "string",
+    "hint": "留空按文件后缀自动推断；可强制指定 mp3 / wav / pcm / ogg / silk / amr / aac / m4a / flac",
+    "default": ""
+  },
+  "enable_itn": {
+    "description": "数字文本规范化（ITN）",
+    "type": "bool",
+    "hint": "把「一百二十三」转成「123」",
+    "default": true
+  },
+  "enable_punc": {
+    "description": "自动添加标点",
+    "type": "bool",
+    "default": true
+  },
+  "enable_ddc": {
+    "description": "语义顺滑（DDC）",
+    "type": "bool",
+    "hint": "自动修正口语中的重复、结巴等",
+    "default": false
+  },
+  "enable_auto_lang": {
+    "description": "自动识别语种（仅 stream 模式）",
+    "type": "bool",
+    "hint": "开启后用小语种模型自动识别 25 种语言，需 language 留空；仅 bigmodel_nostream 支持",
+    "default": true
+  },
+  "show_utterances": {
+    "description": "返回分句结果",
+    "type": "bool",
+    "hint": "开启后响应中包含逐句时间戳，插件本身只取整段文本",
+    "default": false
+  },
+  "timeout": {
+    "description": "请求超时（秒）",
+    "type": "int",
+    "default": 30
+  },
+  "max_retries": {
+    "description": "网络失败重试次数",
+    "type": "int",
+    "hint": "仅对网络/超时错误重试，鉴权与参数错误不会重试",
+    "default": 1
+  },
+  "max_audio_mb": {
+    "description": "本地语音文件大小上限（MB）",
+    "type": "int",
+    "hint": "超过该大小将拒绝上传，防止 base64 请求体过大",
+    "default": 10
+  },
+  "reply_on_error": {
+    "description": "识别失败时回复提示",
+    "type": "bool",
+    "default": false
+  },
+  "error_reply": {
+    "description": "失败提示文本",
+    "type": "string",
+    "hint": "仅在「识别失败时回复提示」开启后生效",
+    "default": "语音识别失败，请稍后重试。"
+  },
+  "debug": {
+    "description": "调试日志",
+    "type": "bool",
+    "hint": "开启后，收到不含语音的消息时会打印消息组件结构，用于排查引用/转发中的语音",
+    "default": false
+  },
+  "text_prefix": {
+    "description": "识别结果前缀",
+    "type": "string",
+    "hint": "拼在识别文本前，让大模型知道这是语音内容；留空则不加前缀",
+    "default": "语音消息:"
+  },
+  "user_uid": {
+    "description": "用户标识",
+    "type": "string",
+    "hint": "透传给火山接口的 user.uid，用于统计与限流排查",
+    "default": "astrbot"
+  },
+  "endpoint": {
+    "description": "接口地址（高级）",
+    "type": "string",
+    "hint": "一般无需修改，仅在使用代理或私有网关时调整",
+    "default": "https://openspeech.bytedance.com/api/v3/auc/bigmodel/recognize/flash"
+  },
+  "stream_endpoint": {
+    "description": "流式接口地址（高级）",
+    "type": "string",
+    "hint": "默认单向流式 bigmodel_nostream，适合整段音频；双向流式为 bigmodel_async",
+    "default": "wss://openspeech.bytedance.com/api/v3/sauc/bigmodel_nostream"
+  },
+  "stream_resource_id": {
+    "description": "流式资源 ID",
+    "type": "string",
+    "hint": "2.0 小时版 volc.seedasr.sauc.duration；2.0 并发版 volc.seedasr.sauc.concurrent；1.0 为 volc.bigasr.sauc.*",
+    "default": "volc.seedasr.sauc.duration"
+  },
+  "ffmpeg_path": {
+    "description": "ffmpeg 路径",
+    "type": "string",
+    "hint": "流式模式遇到 silk/amr 等不支持的格式时用 ffmpeg 转码；填 ffmpeg 表示从 PATH 查找",
+    "default": "ffmpeg"
+  },
+  "stream_chunk_bytes": {
+    "description": "流式分包大小（字节）",
+    "type": "int",
+    "hint": "默认 6400，约等于 16kHz 单声道 16bit 的 200ms 音频",
+    "default": 6400
+  },
+  "app_id": {
+    "description": "APP ID（已废弃）",
+    "type": "string",
+    "hint": "v3 极速识别接口不再使用，请改用 api_key",
+    "default": ""
+  },
+  "access_token": {
+    "description": "Access Token（已废弃）",
+    "type": "string",
+    "hint": "v3 极速识别接口不再使用，请改用 api_key",
+    "default": ""
+  },
+  "cluster": {
+    "description": "集群名称（已废弃）",
+    "type": "string",
+    "hint": "v3 极速识别接口不再使用",
+    "default": "volcengine_input_common"
+  }
+}
